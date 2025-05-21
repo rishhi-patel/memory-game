@@ -1,26 +1,21 @@
 {
-  "name": "Next.js + Docker",
+  "name": "Next.js with Docker CLI",
 
-  // Use an official Codespaces base image
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
+  // Use a base image that already includes docker CLI
+  "image": "mcr.microsoft.com/devcontainers/docker:stable",
 
-  "features": {
-    // ✅ Use the official updated Docker CLI feature
-    "ghcr.io/devcontainers/features/docker-cli:1": {}
-  },
-
-  // Bind mount Docker socket to use host daemon
   "runArgs": ["--volume=/var/run/docker.sock:/var/run/docker.sock"],
 
-  "postCreateCommand": "npm insall --force",
+  "postCreateCommand": "npm install --force",
+
   "forwardPorts": [3000],
 
   "customizations": {
     "vscode": {
       "extensions": [
         "ms-azuretools.vscode-docker",
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint"
       ]
     }
   }
