@@ -1,21 +1,20 @@
-// .devcontainer/devcontainer.json
 {
-  "name": "Next.js + Docker CLI",
+  "name": "Next.js + Docker",
 
-  // Use a host-cached JavaScript devcontainer
+  // Use an official Codespaces base image
   "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
 
   "features": {
-    // Bring in the Docker CLI (no Docker-in-Docker daemon needed)
-    "docker-cli": {}
+    // ✅ Use the official updated Docker CLI feature
+    "ghcr.io/devcontainers/features/docker-cli:1": {}
   },
 
-  // Let the container talk to the host’s Docker daemon
+  // Bind mount Docker socket to use host daemon
   "runArgs": ["--volume=/var/run/docker.sock:/var/run/docker.sock"],
 
-  "postCreateCommand": "npm install --force",
-
+  "postCreateCommand": "npm insall --force",
   "forwardPorts": [3000],
+
   "customizations": {
     "vscode": {
       "extensions": [
