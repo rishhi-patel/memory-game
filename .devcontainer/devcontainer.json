@@ -1,12 +1,11 @@
 {
-  "name": "Next.js with Docker (Safe Base)",
+  "name": "Next.js with Docker",
 
-  // ✅ Use this preloaded image from GitHub Codespaces image set
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 
   "runArgs": ["--volume=/var/run/docker.sock:/var/run/docker.sock"],
 
-  "postCreateCommand": "apt-get update && apt-get install -y docker.io && npm install --force",
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y docker.io && npm ci",
 
   "forwardPorts": [3000],
 
