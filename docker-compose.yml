@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  next-static-site:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    container_name: next-static-site
