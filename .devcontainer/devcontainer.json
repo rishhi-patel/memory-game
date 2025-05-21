@@ -1,32 +1,28 @@
+// .devcontainer/devcontainer.json
 {
-  "name": "Next.js Static Dev Container",
+  "name": "Next.js + Docker CLI",
 
-  // Build this very Dockerfile
-  "build": {
-    "dockerfile": "Dockerfile",
-    "context": "."
+  // Use a host-cached JavaScript devcontainer
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
+
+  "features": {
+    // Bring in the Docker CLI (no Docker-in-Docker daemon needed)
+    "docker-cli": {}
   },
 
-  // Mount the host Docker daemon so 'docker' commands inside the container talk to it
-  "runArgs": ["–-volume", "/var/run/docker.sock:/var/run/docker.sock"],
+  // Let the container talk to the host’s Docker daemon
+  "runArgs": ["--volume=/var/run/docker.sock:/var/run/docker.sock"],
 
-  // Hooks & settings
-  "postCreateCommand": "npm ci",
+  "postCreateCommand": "npm install --force",
 
-  // Forward your dev port (if you run `npm run dev` on :3000)
   "forwardPorts": [3000],
-
-  // Handy VS Code extensions
   "customizations": {
     "vscode": {
       "extensions": [
-        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker",
         "dbaeumer.vscode-eslint",
-        "ms-azuretools.vscode-docker"
-      ],
-      "settings": {
-        "terminal.integrated.shell.linux": "/bin/ash"
-      }
+        "esbenp.prettier-vscode"
+      ]
     }
   }
 }
