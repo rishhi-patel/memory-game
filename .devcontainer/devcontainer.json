@@ -1,18 +1,32 @@
 {
-  "name": "Next.js Static Container",
+  "name": "Next.js Static Dev Container",
+
+  // Build this very Dockerfile
   "build": {
-    "dockerfile": "../Dockerfile",
-    "context": ".."
+    "dockerfile": "Dockerfile",
+    "context": "."
   },
+
+  // Mount the host Docker daemon so 'docker' commands inside the container talk to it
+  "runArgs": ["–-volume", "/var/run/docker.sock:/var/run/docker.sock"],
+
+  // Hooks & settings
+  "postCreateCommand": "npm ci",
+
+  // Forward your dev port (if you run `npm run dev` on :3000)
+  "forwardPorts": [3000],
+
+  // Handy VS Code extensions
   "customizations": {
     "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ms-azuretools.vscode-docker"
+      ],
       "settings": {
         "terminal.integrated.shell.linux": "/bin/ash"
-      },
-      "extensions": ["esbenp.prettier-vscode", "dbaeumer.vscode-eslint"]
+      }
     }
-  },
-  "forwardPorts": [3000],
-  "postCreateCommand": "npm install --force",
-  "remoteUser": "root"
+  }
 }
