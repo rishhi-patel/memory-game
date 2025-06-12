@@ -53,23 +53,21 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
+                echo 'Installing Next.js TypeScript dependencies...'
+                sh '''
+                    # Use npm ci for faster, reliable builds in CI
+                    if [ -f package-lock.json ]; then
                         npm ci --only=production=false
-            echo 'Installing Next.js TypeScript dependencies...'
-            sh '''
-                # Use npm ci for faster, reliable builds in CI
-                if [ -f package-lock.json ]; then
-                npm ci --only=production=false --force
-                else
-                npm install --force
-                fi
+                    else
+                        npm install
+                    fi
 
-                # Verify Next.js and TypeScript installation
-                echo "Checking installed packages..."
-                npm list next typescript react --depth=0 || echo "Some packages might be peer dependencies"
-            '''
+                    # Verify Next.js and TypeScript installation
+                    echo "Checking installed packages..."
+                    npm list next typescript react --depth=0 || echo "Some packages might be peer dependencies"
+                '''
             }
         }
-
 
         stage('TypeScript Check') {
             steps {
