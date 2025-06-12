@@ -55,12 +55,7 @@ pipeline {
             steps {
                 echo 'Installing Next.js TypeScript dependencies...'
                 sh '''
-                    # Use npm ci for faster, reliable builds in CI
-                    if [ -f package-lock.json ]; then
-                        npm ci --only=production=false
-                    else
-                        npm install
-                    fi
+                    npm install --force
 
                     # Verify Next.js and TypeScript installation
                     echo "Checking installed packages..."
