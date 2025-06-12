@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        // Node.js version for Next.js
         NODE_VERSION = '18'
         // Disable Next.js telemetry for CI
         NEXT_TELEMETRY_DISABLED = '1'
